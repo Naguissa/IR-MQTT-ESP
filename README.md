@@ -59,20 +59,20 @@ You can change it using following variables on the code:
 
 Included PubSubClient library in order to incrase max packet size.
 
-Library page: https://pubsubclient.knolleary.net/
-Changed define: MQTT_MAX_PACKET_SIZE
-See more info here: https://pubsubclient.knolleary.net/api.html#configoptions
+ - Library page: https://pubsubclient.knolleary.net/
+ - Changed define: MQTT_MAX_PACKET_SIZE
+ - See more info here: https://pubsubclient.knolleary.net/api.html#configoptions
 
 
 ## Config file (in SPIFFS and when accessing via web) ##
-
+```
 ssid = Your-WiFi-SSID
 password = Your-WiFi-password
 ApiKey = ApiKey-from-https://www.foroelectro.net/arduino/en/mqtt-doc
 email = Email-registered-with-ApiKey
 clientName = A-unique-name-for-the-device
 topic = A-name-for-your-devices-group---ie-home
-
+```
 
 ## Who do I talk to? ##
 
