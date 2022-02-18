@@ -35,10 +35,10 @@ If you compile it with debug enabled you will see a lot of info, as its IP, via 
 
 You need one IR emitter (940nm) and one IR receiver. Also, an generic NPN transistor (BC547, 2N3904 or A42 are good examples).
 
-IR receiver: https://s.click.aliexpress.com/e/_dUhAFXX
-IR emitter: https://s.click.aliexpress.com/e/_dXUhbhx
-Transistor (pack): https://s.click.aliexpress.com/e/_dVthBh7
-Resistor, 10 to 100 Ohm (pack): https://s.click.aliexpress.com/e/_AUPOeB
+ - IR receiver: https://s.click.aliexpress.com/e/_dUhAFXX
+ - IR emitter: https://s.click.aliexpress.com/e/_dXUhbhx
+ - Transistor (pack): https://s.click.aliexpress.com/e/_dVthBh7
+ - Resistor, 10 to 100 Ohm (pack): https://s.click.aliexpress.com/e/_AUPOeB
 
 
 In order to IR emitter work correctly you need the NPN transistor as stated here: https://github.com/crankyoldgit/IRremoteESP8266/wiki#ir-sending
