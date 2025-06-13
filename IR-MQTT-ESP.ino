@@ -12,7 +12,7 @@
  *
  *
  *
- * @version 2.0.0
+ * @version 2.0.1
  */
 
 /*
@@ -310,8 +310,7 @@ void receiveMQTTMessage(char *topicR, byte *payload, unsigned int length) {
 
 
 bool checkSameClient(const char payload[]) {
-    bool sameClient = true;
-    uint16_t i = 0, payloadLen = strlen(payload);
+    uint16_t payloadLen = strlen(payload);
 
     // Always different client name:
     //  - Payload shorter than name length + 2
@@ -327,16 +326,16 @@ bool checkSameClient(const char payload[]) {
 
     yield();
     // Client name
-    for (; sameClient && i < clientNameLen; i++) {
+    for (uint16_t i = 0; i < clientNameLen; i++) {
         DEBUG_PRINT((char) payload[i]);
         if (clientName[i] != payload[i]) {
-            DEBUG_PRINTLN("Same client? No");
+            DEBUG_PRINTLN(" Same client? No");
             return false;
         }
         yield();
     }
 
-    DEBUG_PRINTLN("Same client? Yes");
+    DEBUG_PRINTLN(" Same client? Yes");
     return true;
 }
 
@@ -542,7 +541,7 @@ void sendMQTTMessageConnect() {
 	output += "||";
     output.concat(WiFi.localIP().toString());
 
-    char * messageChar = (char *) malloc(sizeof(char) * output.length() * 2 + 1);
+    char * messageChar = (char *) malloc(sizeof(char) * (output.length() * 2 + 1));
     uMessagesBrokerLib::encode('C', output.c_str(), messageChar);
     mqttClient.publish(fullTopic, messageChar);
     free (messageChar);
@@ -555,7 +554,7 @@ void sendMQTTMessageIRRaw() {
     DEBUG_PRINT("Received raw IR signal of size ");
     DEBUG_PRINT(size);
 	
-	if (size < atoi(config->getPointer("kIrLed"))) {
+	if (size < atoi(config->getPointer("kMinLen"))) {
         DEBUG_PRINTLN(". Skipping.");
         return;
 	}
@@ -617,14 +616,18 @@ void loop() {
     mqttClient.loop();
     yield();
     if(doReset == 2) {
-        // Little delay to avoid cuttin current connection
+        // Little delay to avoid cutting current connection
         for (int i = 0; i < 10; i++) {
             yield();
             mqttClient.loop();
             yield();
             delay(100);
         }
-        ESP.reset();
+        #ifdef ARDUINO_ARCH_ESP32
+                ESP.restart();
+        #else
+                ESP.reset();
+        #endif
     }
         
 
